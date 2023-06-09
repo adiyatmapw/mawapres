@@ -64,7 +64,7 @@
                         </ul>
                     </li>
                     <li class="nav-item dropdown" id="myDropdown">
-                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Data Mahasiswa</a>
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Data Fakultas</a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="../rekomendasi">Surat Rekomendasi Fakultas</a>
                         </ul>
