@@ -62,18 +62,18 @@ $HasilKarya = $db->allHasilKarya();
                                         <td><a href="<?= $HasilKarya['dokumen'] ?>">Lihat Dokumen</a></td>
                                         <td><?= $HasilKarya['programstudi'] ?></td>
                                         <td>
-                                            <?php
-                                            if ($HasilKarya['status'] == "ACC") {
-                                                echo '<span class="badge text-bg-success">' . $HasilKarya['status'] . '</span>';
-                                            } elseif ($HasilKarya['status'] == "Pending"){
-                                                echo '<span class="badge text-bg-warning">' . $HasilKarya['status'] . '</span>';
-                                            } elseif ($HasilKarya['status'] == "Silahkan Registrasi"){
-                                                echo '<span class="badge text-bg-danger">' . $HasilKarya['status'] . '</span>';
-                                            }
-                                            ?></td>
-                                        <td>
-                                            <a href="edit.php?id=<?= $HasilKarya['id'] ?>" class="btn btn-warning">Respons</a>
+                                            <form action="proses.php?action=edit" method="POST">
+                                                <input type="hidden" name="id" value="<?= $HasilKarya['id'] ?>">
+                                                <select class="form-select <?= $HasilKarya['status'] == 'ACC' ? 'bg-success' : ($HasilKarya['status'] == 'Ditolak' ? 'bg-danger' : ($HasilKarya['status'] == 'Pending' ? 'bg-warning' : '')) ?>" aria-label="Default select example" name="status" onchange="this.form.submit()">
+                                                    <option <?= $HasilKarya['status'] == 'ACC' ? 'selected' : '' ?> value="ACC">ACC</option>
+                                                    <option <?= $HasilKarya['status'] == 'Ditolak' ? 'selected' : '' ?> value="Ditolak">Ditolak</option>
+                                                    <option <?= $HasilKarya['status'] == 'Pending' ? 'selected' : '' ?> value="Pending">Pending</option>
+                                                </select>
+                                            </form>
                                         </td>
+                                        <!-- </td>
+                                            <a href="edit.php?id=<?= $HasilKarya['id'] ?>" class="btn btn-warning">Respons</a>
+                                        </td> -->
                                     </tr>
                                 <?php $i++;
                                 } ?>

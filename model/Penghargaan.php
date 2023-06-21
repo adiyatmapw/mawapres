@@ -23,4 +23,19 @@ class Penghargaan extends Database
 			echo ("Error description: " . $this->connection->error);
 		}
 	}
+
+	function editPenghargaan($id, $status)
+	{
+		$query = mysqli_query($this->connection, "UPDATE Penghargaan SET status='$status' WHERE id=$id");
+	}
+
+	function getPenghargaan($id)
+	{
+		$query = "SELECT * FROM Penghargaan WHERE id='$id' ";
+		$data = mysqli_query($this->connection, $query);
+		if (!$this->connection->query($query)) {
+			echo ("Error description: " . $this->connection->error);
+		}
+		return mysqli_fetch_assoc($data);
+	}
 }

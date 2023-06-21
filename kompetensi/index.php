@@ -62,18 +62,18 @@ $kompetensi = $db->allKompetensi();
                                         <td><a href="<?= $kompetensii['dokumen'] ?>">Lihat Dokumen</a></td>
                                         <td><?= $kompetensii['programstudi'] ?></td>
                                         <td>
-                                            <?php
-                                            if ($kompetensii['status'] == "ACC") {
-                                                echo '<span class="badge text-bg-success">' . $kompetensii['status'] . '</span>';
-                                            } elseif ($kompetensii['status'] == "Pending"){
-                                                echo '<span class="badge text-bg-warning">' . $kompetensii['status'] . '</span>';
-                                            } elseif ($kompetensii['status'] == "Silahkan Registrasi"){
-                                                echo '<span class="badge text-bg-danger">' . $kompetensii['status'] . '</span>';
-                                            }
-                                            ?></td>
-                                        <td>
-                                            <a href="edit.php?id=<?= $kompetensii['id'] ?>" class="btn btn-warning">Respons</a>
+                                            <form action="proses.php?action=edit" method="POST">
+                                                <input type="hidden" name="id" value="<?= $kompetensii['id'] ?>">
+                                                <select class="form-select <?= $kompetensii['status'] == 'ACC' ? 'bg-success' : ($kompetensii['status'] == 'Ditolak' ? 'bg-danger' : ($kompetensii['status'] == 'Pending' ? 'bg-warning' : '')) ?>" aria-label="Default select example" name="status" onchange="this.form.submit()">
+                                                    <option <?= $kompetensii['status'] == 'ACC' ? 'selected' : '' ?> value="ACC">ACC</option>
+                                                    <option <?= $kompetensii['status'] == 'Ditolak' ? 'selected' : '' ?> value="Ditolak">Ditolak</option>
+                                                    <option <?= $kompetensii['status'] == 'Pending' ? 'selected' : '' ?> value="Pending">Pending</option>
+                                                </select>
+                                            </form>
                                         </td>
+                                        <!-- <td>
+                                            <a href="edit.php?id=<?= $kompetensii['id'] ?>" class="btn btn-warning">Respons</a>
+                                        </td> -->
                                     </tr>
                                 <?php $i++;
                                 } ?>

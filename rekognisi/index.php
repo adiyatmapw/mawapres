@@ -62,18 +62,18 @@ $rekognisi = $db->allRekognisi();
                                         <td><a href="<?= $rekognisii['dokumen'] ?>">Lihat Dokumen</a></td>
                                         <td><?= $rekognisii['programstudi'] ?></td>
                                         <td>
-                                            <?php
-                                            if ($rekognisii['status'] == "ACC") {
-                                                echo '<span class="badge text-bg-success">' . $rekognisii['status'] . '</span>';
-                                            } elseif ($rekognisii['status'] == "Pending"){
-                                                echo '<span class="badge text-bg-warning">' . $rekognisii['status'] . '</span>';
-                                            } elseif ($rekognisii['status'] == "Silahkan Registrasi"){
-                                                echo '<span class="badge text-bg-danger">' . $rekognisii['status'] . '</span>';
-                                            }
-                                            ?></td>
-                                        <td>
-                                            <a href="edit.php?id=<?= $rekognisii['id'] ?>" class="btn btn-warning">Respons</a>
+                                            <form action="proses.php?action=edit" method="POST">
+                                                <input type="hidden" name="id" value="<?= $rekognisii['id'] ?>">
+                                                <select class="form-select <?= $rekognisii['status'] == 'ACC' ? 'bg-success' : ($rekognisii['status'] == 'Ditolak' ? 'bg-danger' : ($rekognisii['status'] == 'Pending' ? 'bg-warning' : '')) ?>" aria-label="Default select example" name="status" onchange="this.form.submit()">
+                                                    <option <?= $rekognisii['status'] == 'ACC' ? 'selected' : '' ?> value="ACC">ACC</option>
+                                                    <option <?= $rekognisii['status'] == 'Ditolak' ? 'selected' : '' ?> value="Ditolak">Ditolak</option>
+                                                    <option <?= $rekognisii['status'] == 'Pending' ? 'selected' : '' ?> value="Pending">Pending</option>
+                                                </select>
+                                            </form>
                                         </td>
+                                        <!-- </td>
+                                            <a href="edit.php?id=<?= $rekognisii['id'] ?>" class="btn btn-warning">Respons</a>
+                                        </td> -->
                                     </tr>
                                 <?php $i++;
                                 } ?>

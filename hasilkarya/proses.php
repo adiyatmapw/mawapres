@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../model/Rekognisi.php';
+include '../model/HasilKarya.php';
 $db = new HasilKarya();
 
 $action = $_GET['action'];
@@ -25,6 +25,9 @@ if ($action == 'upload') {
         }
     }
     
+} else if($action == 'edit') {
+    $db -> editHasilKarya($_POST['id'], $_POST['status']);
+    header("location:index.php?message=edit-success");
 } else {
-    header("location:../upload/dokumenmahasiswa.php");
+    header("location:../upload/dokumenlain.php");
 }

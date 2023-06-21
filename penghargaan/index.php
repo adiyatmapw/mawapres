@@ -62,18 +62,18 @@ $penghargaan = $db->allPenghargaan();
                                         <td><a href="<?= $penghargaan['dokumen'] ?>">Lihat Dokumen</a></td>
                                         <td><?= $penghargaan['programstudi'] ?></td>
                                         <td>
-                                            <?php
-                                            if ($penghargaan['status'] == "ACC") {
-                                                echo '<span class="badge text-bg-success">' . $penghargaan['status'] . '</span>';
-                                            } elseif ($penghargaan['status'] == "Pending"){
-                                                echo '<span class="badge text-bg-warning">' . $penghargaan['status'] . '</span>';
-                                            } elseif ($penghargaan['status'] == "Silahkan Registrasi"){
-                                                echo '<span class="badge text-bg-danger">' . $penghargaan['status'] . '</span>';
-                                            }
-                                            ?></td>
-                                        <td>
-                                            <a href="edit.php?id=<?= $penghargaan['id'] ?>" class="btn btn-warning">Respons</a>
+                                            <form action="proses.php?action=edit" method="POST">
+                                                <input type="hidden" name="id" value="<?= $penghargaan['id'] ?>">
+                                                <select class="form-select <?= $penghargaan['status'] == 'ACC' ? 'bg-success' : ($penghargaan['status'] == 'Ditolak' ? 'bg-danger' : ($penghargaan['status'] == 'Pending' ? 'bg-warning' : '')) ?>" aria-label="Default select example" name="status" onchange="this.form.submit()">
+                                                    <option <?= $penghargaan['status'] == 'ACC' ? 'selected' : '' ?> value="ACC">ACC</option>
+                                                    <option <?= $penghargaan['status'] == 'Ditolak' ? 'selected' : '' ?> value="Ditolak">Ditolak</option>
+                                                    <option <?= $penghargaan['status'] == 'Pending' ? 'selected' : '' ?> value="Pending">Pending</option>
+                                                </select>
+                                            </form>
                                         </td>
+                                        <!-- <td>
+                                            <a href="edit.php?id=<?= $penghargaan['id'] ?>" class="btn btn-warning">Respons</a>
+                                        </td> -->
                                     </tr>
                                 <?php $i++;
                                 } ?>

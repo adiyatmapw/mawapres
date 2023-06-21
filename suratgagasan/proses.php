@@ -25,6 +25,9 @@ if ($action == 'upload') {
         }
     }
     
+} else if($action == 'edit') {
+    $db -> editSuratGagasan($_POST['id'], $_POST['status']);
+    header("location:index.php?message=edit-success");
 } else {
     header("location:../upload/dokumenlain.php");
 }

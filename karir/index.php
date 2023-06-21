@@ -62,18 +62,18 @@ $Karir = $db->allKarir();
                                         <td><a href="<?= $Karirr['dokumen'] ?>">Lihat Dokumen</a></td>
                                         <td><?= $Karirr['programstudi'] ?></td>
                                         <td>
-                                            <?php
-                                            if ($Karirr['status'] == "ACC") {
-                                                echo '<span class="badge text-bg-success">' . $Karirr['status'] . '</span>';
-                                            } elseif ($Karirr['status'] == "Pending"){
-                                                echo '<span class="badge text-bg-warning">' . $Karirr['status'] . '</span>';
-                                            } elseif ($Karirr['status'] == "Silahkan Registrasi"){
-                                                echo '<span class="badge text-bg-danger">' . $Karirr['status'] . '</span>';
-                                            }
-                                            ?></td>
-                                        <td>
-                                            <a href="edit.php?id=<?= $Karirr['id'] ?>" class="btn btn-warning">Respons</a>
+                                            <form action="proses.php?action=edit" method="POST">
+                                                <input type="hidden" name="id" value="<?= $Karirr['id'] ?>">
+                                                <select class="form-select <?= $Karirr['status'] == 'ACC' ? 'bg-success' : ($Karirr['status'] == 'Ditolak' ? 'bg-danger' : ($Karirr['status'] == 'Pending' ? 'bg-warning' : '')) ?>" aria-label="Default select example" name="status" onchange="this.form.submit()">
+                                                    <option <?= $Karirr['status'] == 'ACC' ? 'selected' : '' ?> value="ACC">ACC</option>
+                                                    <option <?= $Karirr['status'] == 'Ditolak' ? 'selected' : '' ?> value="Ditolak">Ditolak</option>
+                                                    <option <?= $Karirr['status'] == 'Pending' ? 'selected' : '' ?> value="Pending">Pending</option>
+                                                </select>
+                                            </form>
                                         </td>
+                                        <!-- <td>
+                                            <a href="edit.php?id=<?= $Karirr['id'] ?>" class="btn btn-warning">Respons</a>
+                                        </td> -->
                                     </tr>
                                 <?php $i++;
                                 } ?>

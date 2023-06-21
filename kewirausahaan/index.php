@@ -62,18 +62,18 @@ $Kewirausahaan = $db->allKewirausahaan();
                                         <td><a href="<?= $Kewirausahaan['dokumen'] ?>">Lihat Dokumen</a></td>
                                         <td><?= $Kewirausahaan['programstudi'] ?></td>
                                         <td>
-                                            <?php
-                                            if ($Kewirausahaan['status'] == "ACC") {
-                                                echo '<span class="badge text-bg-success">' . $Kewirausahaan['status'] . '</span>';
-                                            } elseif ($Kewirausahaan['status'] == "Pending"){
-                                                echo '<span class="badge text-bg-warning">' . $Kewirausahaan['status'] . '</span>';
-                                            } elseif ($Kewirausahaan['status'] == "Silahkan Registrasi"){
-                                                echo '<span class="badge text-bg-danger">' . $Kewirausahaan['status'] . '</span>';
-                                            }
-                                            ?></td>
-                                        <td>
-                                            <a href="edit.php?id=<?= $Kewirausahaan['id'] ?>" class="btn btn-warning">Respons</a>
+                                            <form action="proses.php?action=edit" method="POST">
+                                                <input type="hidden" name="id" value="<?= $Kewirausahaan['id'] ?>">
+                                                <select class="form-select <?= $Kewirausahaan['status'] == 'ACC' ? 'bg-success' : ($Kewirausahaan['status'] == 'Ditolak' ? 'bg-danger' : ($Kewirausahaan['status'] == 'Pending' ? 'bg-warning' : '')) ?>" aria-label="Default select example" name="status" onchange="this.form.submit()">
+                                                    <option <?= $Kewirausahaan['status'] == 'ACC' ? 'selected' : '' ?> value="ACC">ACC</option>
+                                                    <option <?= $Kewirausahaan['status'] == 'Ditolak' ? 'selected' : '' ?> value="Ditolak">Ditolak</option>
+                                                    <option <?= $Kewirausahaan['status'] == 'Pending' ? 'selected' : '' ?> value="Pending">Pending</option>
+                                                </select>
+                                            </form>
                                         </td>
+                                        <!-- <td>
+                                            <a href="edit.php?id=<?= $Kewirausahaan['id'] ?>" class="btn btn-warning">Respons</a>
+                                        </td> -->
                                     </tr>
                                 <?php $i++;
                                 } ?>

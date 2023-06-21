@@ -62,18 +62,18 @@ $SuratGagasan = $db->allSuratGagasan();
                                         <td><a href="<?= $SuratGagasann['dokumen'] ?>">Lihat Dokumen</a></td>
                                         <td><?= $SuratGagasann['programstudi'] ?></td>
                                         <td>
-                                            <?php
-                                            if ($SuratGagasann['status'] == "ACC") {
-                                                echo '<span class="badge text-bg-success">' . $SuratGagasann['status'] . '</span>';
-                                            } elseif ($SuratGagasann['status'] == "Pending"){
-                                                echo '<span class="badge text-bg-warning">' . $SuratGagasann['status'] . '</span>';
-                                            } elseif ($SuratGagasann['status'] == "Silahkan Registrasi"){
-                                                echo '<span class="badge text-bg-danger">' . $SuratGagasann['status'] . '</span>';
-                                            }
-                                            ?></td>
-                                        <td>
-                                            <a href="edit.php?id=<?= $SuratGagasann['id'] ?>" class="btn btn-warning">Respons</a>
+                                            <form action="proses.php?action=edit" method="POST">
+                                                <input type="hidden" name="id" value="<?= $SuratGagasann['id'] ?>">
+                                                <select class="form-select <?= $SuratGagasann['status'] == 'ACC' ? 'bg-success' : ($SuratGagasann['status'] == 'Ditolak' ? 'bg-danger' : ($SuratGagasann['status'] == 'Pending' ? 'bg-warning' : '')) ?>" aria-label="Default select example" name="status" onchange="this.form.submit()">
+                                                    <option <?= $SuratGagasann['status'] == 'ACC' ? 'selected' : '' ?> value="ACC">ACC</option>
+                                                    <option <?= $SuratGagasann['status'] == 'Ditolak' ? 'selected' : '' ?> value="Ditolak">Ditolak</option>
+                                                    <option <?= $SuratGagasann['status'] == 'Pending' ? 'selected' : '' ?> value="Pending">Pending</option>
+                                                </select>
+                                            </form>
                                         </td>
+                                        <!-- <td>
+                                            <a href="edit.php?id=<?= $SuratGagasann['id'] ?>" class="btn btn-warning">Respons</a>
+                                        </td> -->
                                     </tr>
                                 <?php $i++;
                                 } ?>

@@ -62,18 +62,18 @@ $Sertifikat = $db->allSertifikat();
                                         <td><a href="<?= $Sertifikatt['dokumen'] ?>">Lihat Dokumen</a></td>
                                         <td><?= $Sertifikatt['programstudi'] ?></td>
                                         <td>
-                                            <?php
-                                            if ($Sertifikatt['status'] == "ACC") {
-                                                echo '<span class="badge text-bg-success">' . $Sertifikatt['status'] . '</span>';
-                                            } elseif ($Sertifikatt['status'] == "Pending"){
-                                                echo '<span class="badge text-bg-warning">' . $Sertifikatt['status'] . '</span>';
-                                            } elseif ($Sertifikatt['status'] == "Silahkan Registrasi"){
-                                                echo '<span class="badge text-bg-danger">' . $Sertifikatt['status'] . '</span>';
-                                            }
-                                            ?></td>
-                                        <td>
-                                            <a href="edit.php?id=<?= $Sertifikatt['id'] ?>" class="btn btn-warning">Respons</a>
+                                            <form action="proses.php?action=edit" method="POST">
+                                                <input type="hidden" name="id" value="<?= $Sertifikatt['id'] ?>">
+                                                <select class="form-select <?= $Sertifikatt['status'] == 'ACC' ? 'bg-success' : ($Sertifikatt['status'] == 'Ditolak' ? 'bg-danger' : ($Sertifikatt['status'] == 'Pending' ? 'bg-warning' : '')) ?>" aria-label="Default select example" name="status" onchange="this.form.submit()">
+                                                    <option <?= $Sertifikatt['status'] == 'ACC' ? 'selected' : '' ?> value="ACC">ACC</option>
+                                                    <option <?= $Sertifikatt['status'] == 'Ditolak' ? 'selected' : '' ?> value="Ditolak">Ditolak</option>
+                                                    <option <?= $Sertifikatt['status'] == 'Pending' ? 'selected' : '' ?> value="Pending">Pending</option>
+                                                </select>
+                                            </form>
                                         </td>
+                                        <!-- <td>
+                                            <a href="edit.php?id=<?= $Sertifikatt['id'] ?>" class="btn btn-warning">Respons</a>
+                                        </td> -->
                                     </tr>
                                 <?php $i++;
                                 } ?>

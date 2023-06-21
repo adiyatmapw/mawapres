@@ -62,18 +62,18 @@ $Cv = $db->allCv();
                                         <td><a href="<?= $Cvv['dokumen'] ?>">Lihat Dokumen</a></td>
                                         <td><?= $Cvv['programstudi'] ?></td>
                                         <td>
-                                            <?php
-                                            if ($Cvv['status'] == "ACC") {
-                                                echo '<span class="badge text-bg-success">' . $Cvv['status'] . '</span>';
-                                            } elseif ($Cvv['status'] == "Pending"){
-                                                echo '<span class="badge text-bg-warning">' . $Cvv['status'] . '</span>';
-                                            } elseif ($Cvv['status'] == "Silahkan Registrasi"){
-                                                echo '<span class="badge text-bg-danger">' . $Cvv['status'] . '</span>';
-                                            }
-                                            ?></td>
-                                        <td>
-                                            <a href="edit.php?id=<?= $Cvv['id'] ?>" class="btn btn-warning">Respons</a>
+                                            <form action="proses.php?action=edit" method="POST">
+                                                <input type="hidden" name="id" value="<?= $Cvv['id'] ?>">
+                                                <select class="form-select <?= $Cvv['status'] == 'ACC' ? 'bg-success' : ($Cvv['status'] == 'Ditolak' ? 'bg-danger' : ($Cvv['status'] == 'Pending' ? 'bg-warning' : '')) ?>" aria-label="Default select example" name="status" onchange="this.form.submit()">
+                                                    <option <?= $Cvv['status'] == 'ACC' ? 'selected' : '' ?> value="ACC">ACC</option>
+                                                    <option <?= $Cvv['status'] == 'Ditolak' ? 'selected' : '' ?> value="Ditolak">Ditolak</option>
+                                                    <option <?= $Cvv['status'] == 'Pending' ? 'selected' : '' ?> value="Pending">Pending</option>
+                                                </select>
+                                            </form>
                                         </td>
+                                        <!-- </td>
+                                            <a href="edit.php?id=<?= $Cvv['id'] ?>" class="btn btn-warning">Respons</a>
+                                        </td> -->
                                     </tr>
                                 <?php $i++;
                                 } ?>

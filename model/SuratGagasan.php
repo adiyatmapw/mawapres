@@ -23,4 +23,19 @@ class SuratGagasan extends Database
 			echo ("Error description: " . $this->connection->error);
 		}
 	}
+
+	function editSuratGagasan($id, $status)
+	{
+		$query = mysqli_query($this->connection, "UPDATE SuratGagasan SET status='$status' WHERE id=$id");
+	}
+
+	function getSuratGagasan($id)
+	{
+		$query = "SELECT * FROM SuratGagasan WHERE id='$id' ";
+		$data = mysqli_query($this->connection, $query);
+		if (!$this->connection->query($query)) {
+			echo ("Error description: " . $this->connection->error);
+		}
+		return mysqli_fetch_assoc($data);
+	}
 }

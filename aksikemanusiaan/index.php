@@ -62,18 +62,18 @@ $AksiKemanusiaan = $db->allAksiKemanusiaan();
                                         <td><a href="<?= $AksiKemanusiaann['dokumen'] ?>">Lihat Dokumen</a></td>
                                         <td><?= $AksiKemanusiaann['programstudi'] ?></td>
                                         <td>
-                                            <?php
-                                            if ($AksiKemanusiaann['status'] == "ACC") {
-                                                echo '<span class="badge text-bg-success">' . $AksiKemanusiaann['status'] . '</span>';
-                                            } elseif ($AksiKemanusiaann['status'] == "Pending"){
-                                                echo '<span class="badge text-bg-warning">' . $AksiKemanusiaann['status'] . '</span>';
-                                            } elseif ($AksiKemanusiaann['status'] == "Silahkan Registrasi"){
-                                                echo '<span class="badge text-bg-danger">' . $AksiKemanusiaann['status'] . '</span>';
-                                            }
-                                            ?></td>
-                                        <td>
-                                            <a href="edit.php?id=<?= $AksiKemanusiaann['id'] ?>" class="btn btn-warning">Respons</a>
+                                            <form action="proses.php?action=edit" method="POST">
+                                                <input type="hidden" name="id" value="<?= $AksiKemanusiaann['id'] ?>">
+                                                <select class="form-select <?= $AksiKemanusiaann['status'] == 'ACC' ? 'bg-success' : ($AksiKemanusiaann['status'] == 'Ditolak' ? 'bg-danger' : ($AksiKemanusiaann['status'] == 'Pending' ? 'bg-warning' : '')) ?>" aria-label="Default select example" name="status" onchange="this.form.submit()">
+                                                    <option <?= $AksiKemanusiaann['status'] == 'ACC' ? 'selected' : '' ?> value="ACC">ACC</option>
+                                                    <option <?= $AksiKemanusiaann['status'] == 'Ditolak' ? 'selected' : '' ?> value="Ditolak">Ditolak</option>
+                                                    <option <?= $AksiKemanusiaann['status'] == 'Pending' ? 'selected' : '' ?> value="Pending">Pending</option>
+                                                </select>
+                                            </form>
                                         </td>
+                                        <!-- <td>
+                                            <a href="edit.php?id=<?= $AksiKemanusiaann['id'] ?>" class="btn btn-warning">Respons</a>
+                                        </td> -->
                                     </tr>
                                 <?php $i++;
                                 } ?>

@@ -23,4 +23,19 @@ class Sertifikat extends Database
 			echo ("Error description: " . $this->connection->error);
 		}
 	}
+
+	function editSertifikat($id, $status)
+	{
+		$query = mysqli_query($this->connection, "UPDATE Sertifikat SET status='$status' WHERE id=$id");
+	}
+
+	function getSertifikat($id)
+	{
+		$query = "SELECT * FROM Sertifikat WHERE id='$id' ";
+		$data = mysqli_query($this->connection, $query);
+		if (!$this->connection->query($query)) {
+			echo ("Error description: " . $this->connection->error);
+		}
+		return mysqli_fetch_assoc($data);
+	}
 }

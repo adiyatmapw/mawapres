@@ -54,7 +54,7 @@ $Pakta = $db->allPakta();
                             </thead>
                             <tbody>
                                 <?php $i = 1;
-                                foreach ($Pakta as $Pakta) { ?>
+                                foreach ($Pakta as $Paktaa) { ?>
                                     <tr>
                                         <th scope="row"><?= $i ?></th>
                                         <td><?= $Paktaa['nama'] ?></td>
@@ -62,18 +62,18 @@ $Pakta = $db->allPakta();
                                         <td><a href="<?= $Paktaa['dokumen'] ?>">Lihat Dokumen</a></td>
                                         <td><?= $Paktaa['programstudi'] ?></td>
                                         <td>
-                                            <?php
-                                            if ($Paktaa['status'] == "ACC") {
-                                                echo '<span class="badge text-bg-success">' . $Paktaa['status'] . '</span>';
-                                            } elseif ($Paktaa['status'] == "Pending"){
-                                                echo '<span class="badge text-bg-warning">' . $Paktaa['status'] . '</span>';
-                                            } elseif ($Paktaa['status'] == "Silahkan Registrasi"){
-                                                echo '<span class="badge text-bg-danger">' . $Paktaa['status'] . '</span>';
-                                            }
-                                            ?></td>
-                                        <td>
-                                            <a href="edit.php?id=<?= $Paktaa['id'] ?>" class="btn btn-warning">Respons</a>
+                                            <form action="proses.php?action=edit" method="POST">
+                                                <input type="hidden" name="id" value="<?= $Paktaa['id'] ?>">
+                                                <select class="form-select <?= $Paktaa['status'] == 'ACC' ? 'bg-success' : ($Paktaa['status'] == 'Ditolak' ? 'bg-danger' : ($Paktaa['status'] == 'Pending' ? 'bg-warning' : '')) ?>" aria-label="Default select example" name="status" onchange="this.form.submit()">
+                                                    <option <?= $Paktaa['status'] == 'ACC' ? 'selected' : '' ?> value="ACC">ACC</option>
+                                                    <option <?= $Paktaa['status'] == 'Ditolak' ? 'selected' : '' ?> value="Ditolak">Ditolak</option>
+                                                    <option <?= $Paktaa['status'] == 'Pending' ? 'selected' : '' ?> value="Pending">Pending</option>
+                                                </select>
+                                            </form>
                                         </td>
+                                        <!-- <td>
+                                            <a href="edit.php?id=<?= $Paktaa['id'] ?>" class="btn btn-warning">Respons</a>
+                                        </td> -->
                                     </tr>
                                 <?php $i++;
                                 } ?>

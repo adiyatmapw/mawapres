@@ -23,4 +23,19 @@ class AksiKemanusiaan extends Database
 			echo ("Error description: " . $this->connection->error);
 		}
 	}
+
+	function editAksiKemanusiaan($id, $status)
+	{
+		$query = mysqli_query($this->connection, "UPDATE AksiKemanusiaan SET status='$status' WHERE id=$id");
+	}
+
+	function getAksiKemanusiaan($id)
+	{
+		$query = "SELECT * FROM AksiKemanusiaan WHERE id='$id' ";
+		$data = mysqli_query($this->connection, $query);
+		if (!$this->connection->query($query)) {
+			echo ("Error description: " . $this->connection->error);
+		}
+		return mysqli_fetch_assoc($data);
+	}
 }

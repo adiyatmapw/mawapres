@@ -10,9 +10,9 @@ class Registrasi extends Database
 		}
 	}
 
-	function allRegistrasi()
+	function allRegistrasi($nim)
 	{
-		$data = mysqli_query($this->connection, "SELECT * FROM registrasi");
+		$data = mysqli_query($this->connection, "SELECT * FROM registrasi WHERE nim='$nim'");
 		return $data;
 	}
 
@@ -23,4 +23,78 @@ class Registrasi extends Database
 			echo ("Error description: " . $this->connection->error);
 		}
 	}
+
+	function getKompetensi($nim)
+	{
+		$data = mysqli_query($this->connection, "SELECT * FROM Kompetensi WHERE nim='$nim'");
+		return $data;
+	}
+
+	function getRekognisi($nim)
+	{
+		$data = mysqli_query($this->connection, "SELECT * FROM Rekognisi WHERE nim='$nim'");
+		return $data;
+	}
+
+	function getPenghargaan($nim)
+	{
+		$data = mysqli_query($this->connection, "SELECT * FROM Penghargaan WHERE nim='$nim'");
+		return $data;
+	}
+
+	function getKarirOrganisasi($nim)
+	{
+		$data = mysqli_query($this->connection, "SELECT * FROM Karir WHERE nim='$nim'");
+		return $data;
+	}
+
+	function getHasilKarya($nim)
+	{
+		$data = mysqli_query($this->connection, "SELECT * FROM HasilKarya WHERE nim='$nim'");
+		return $data;
+	}
+
+	function getAksiKemanusiaan($nim)
+	{
+		$data = mysqli_query($this->connection, "SELECT * FROM AksiKemanusiaan WHERE nim='$nim'");
+		return $data;
+	}
+
+	function getKewirausahaan($nim)
+	{
+		$data = mysqli_query($this->connection, "SELECT * FROM Kewirausahaan WHERE nim='$nim'");
+		return $data;
+	}
+
+	function getSuratRekomendasi($nim)
+	{
+		$data = mysqli_query($this->connection, "SELECT * FROM Rekomendasi WHERE nim='$nim'");
+		return $data;
+	}
+
+	function getSuratGagasan($nim)
+	{
+		$data = mysqli_query($this->connection, "SELECT * FROM SuratGagasan WHERE nim='$nim'");
+		return $data;
+	}
+
+	function getCv($nim)
+	{
+		$data = mysqli_query($this->connection, "SELECT * FROM Cv WHERE nim='$nim'");
+		return $data;
+	}
+
+	function getPakta($nim)
+	{
+		$data = mysqli_query($this->connection, "SELECT * FROM Pakta WHERE nim='$nim'");
+		return $data;
+	}
+
+	function getSertifikat($nim)
+	{
+		$data = mysqli_query($this->connection, "SELECT * FROM Sertifikat WHERE nim='$nim'");
+		return $data;
+	}
+
+
 }

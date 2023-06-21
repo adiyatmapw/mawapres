@@ -62,18 +62,18 @@ $Rekomendasi = $db->allRekomendasi();
                                         <td><a href="<?= $Rekomendasi['dokumen'] ?>">Lihat Dokumen</a></td>
                                         <td><?= $Rekomendasi['programstudi'] ?></td>
                                         <td>
-                                            <?php
-                                            if ($Rekomendasi['status'] == "ACC") {
-                                                echo '<span class="badge text-bg-success">' . $Rekomendasi['status'] . '</span>';
-                                            } elseif ($Rekomendasi['status'] == "Pending"){
-                                                echo '<span class="badge text-bg-warning">' . $Rekomendasi['status'] . '</span>';
-                                            } elseif ($Rekomendasi['status'] == "Silahkan Registrasi"){
-                                                echo '<span class="badge text-bg-danger">' . $Rekomendasi['status'] . '</span>';
-                                            }
-                                            ?></td>
-                                        <td>
-                                            <a href="edit.php?id=<?= $Rekomendasi['id'] ?>" class="btn btn-warning">Respons</a>
+                                            <form action="proses.php?action=edit" method="POST">
+                                                <input type="hidden" name="id" value="<?= $Rekomendasi['id'] ?>">
+                                                <select class="form-select <?= $Rekomendasi['status'] == 'ACC' ? 'bg-success' : ($Rekomendasi['status'] == 'Ditolak' ? 'bg-danger' : ($Rekomendasi['status'] == 'Pending' ? 'bg-warning' : '')) ?>" aria-label="Default select example" name="status" onchange="this.form.submit()">
+                                                    <option <?= $Rekomendasi['status'] == 'ACC' ? 'selected' : '' ?> value="ACC">ACC</option>
+                                                    <option <?= $Rekomendasi['status'] == 'Ditolak' ? 'selected' : '' ?> value="Ditolak">Ditolak</option>
+                                                    <option <?= $Rekomendasi['status'] == 'Pending' ? 'selected' : '' ?> value="Pending">Pending</option>
+                                                </select>
+                                            </form>
                                         </td>
+                                        <!-- <td>
+                                            <a href="edit.php?id=<?= $Rekomendasi['id'] ?>" class="btn btn-warning">Respons</a>
+                                        </td> -->
                                     </tr>
                                 <?php $i++;
                                 } ?>

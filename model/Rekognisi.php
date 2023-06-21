@@ -23,4 +23,19 @@ class Rekognisi extends Database
 			echo ("Error description: " . $this->connection->error);
 		}
 	}
+
+	function editRekognisi($id, $status)
+	{
+		$query = mysqli_query($this->connection, "UPDATE Rekognisi SET status='$status' WHERE id=$id");
+	}
+
+	function getRekognisi($id)
+	{
+		$query = "SELECT * FROM Rekognisi WHERE id='$id' ";
+		$data = mysqli_query($this->connection, $query);
+		if (!$this->connection->query($query)) {
+			echo ("Error description: " . $this->connection->error);
+		}
+		return mysqli_fetch_assoc($data);
+	}
 }

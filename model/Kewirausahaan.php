@@ -23,4 +23,19 @@ class Kewirausahaan extends Database
 			echo ("Error description: " . $this->connection->error);
 		}
 	}
+
+	function editKewirausahaan($id, $status)
+	{
+		$query = mysqli_query($this->connection, "UPDATE Kewirausahaan SET status='$status' WHERE id=$id");
+	}
+
+	function getKewirausahaan($id)
+	{
+		$query = "SELECT * FROM Kewirausahaan WHERE id='$id' ";
+		$data = mysqli_query($this->connection, $query);
+		if (!$this->connection->query($query)) {
+			echo ("Error description: " . $this->connection->error);
+		}
+		return mysqli_fetch_assoc($data);
+	}
 }

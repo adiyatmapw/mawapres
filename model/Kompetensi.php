@@ -23,4 +23,21 @@ class Kompetensi extends Database
 			echo ("Error description: " . $this->connection->error);
 		}
 	}
+
+	function editKompetensi($id, $status)
+	{
+		$query = mysqli_query($this->connection, "UPDATE Kompetensi SET status='$status' WHERE id=$id");
+	}
+
+	function getKompetensi($id)
+	{
+		$title = "Dokumen Kompetensi";
+		$query = "SELECT * FROM Kompetensi WHERE id='$id' ";
+		$data = mysqli_query($this->connection, $query);
+		if (!$this->connection->query($query)) {
+			echo ("Error description: " . $this->connection->error);
+		}
+		return mysqli_fetch_assoc($data);
+		return $title;
+	}
 }
